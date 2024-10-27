@@ -1,3 +1,6 @@
 /venv
 /.env
 /Documentation
+/log
+/artifacts
+__pycache__/

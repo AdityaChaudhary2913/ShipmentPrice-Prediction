@@ -55,7 +55,7 @@ class shippingData:
                 "Price Of Sculpture": [self.priceOfSculpture],
                 "Base Shipping Price": [self.baseShippingPrice],
                 "International": [self.international],
-                "Express src": [self.expresssrc],
+                "Express Shipment": [self.expresssrc],
                 "Installation Included": [self.installationIncluded],
                 "Transport": [self.transport],
                 "Fragile": [self.fragile],
@@ -95,7 +95,7 @@ class CostPredictor:
                 logging.info("Loaded best model from s3 bucket")
             except:
                 best_model = MainUtils.load_object(self.best_model_path)
-
+            print(best_model)
             # Predicting with best model
             result = best_model.predict(X)
             logging.info("Exited predict method of the class")

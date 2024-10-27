@@ -1,10 +1,9 @@
 import shutil
 import sys
-from typing import Dict, Tuple, List
+from typing import Dict, Tuple
 import dill
 import xgboost
 import numpy as np
-import pandas as pd
 import yaml
 from pandas import DataFrame
 from sklearn.metrics import r2_score
@@ -119,6 +118,9 @@ class MainUtils:
     def save_object(file_path: str, obj: object) -> None:
         logging.info("Entered the save_object method of MainUtils class")
         try:
+            directory = os.path.dirname(file_path)
+            if not os.path.exists(directory):
+                os.makedirs(directory)
             with open(file_path, "wb") as file_obj:
                 dill.dump(obj, file_obj)
             logging.info("Exited the save_object method of MainUtils class")

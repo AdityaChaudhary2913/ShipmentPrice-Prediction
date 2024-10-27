@@ -26,7 +26,8 @@ class ModelEvaluation:
         logging.info("Entered the get_s3_model method of Model Evaluation class")
         try:
             # Checking whether model is present in S3 bucket or not
-            status = self.model_evaluation_config.S3_OPERATIONS.is_model_present(BUCKET_NAME, S3_MODEL_NAME)
+            # status = self.model_evaluation_config.S3_OPERATIONS.is_model_present(BUCKET_NAME, S3_MODEL_NAME)
+            status = False
             logging.info(f"Got the status - is model present? -> {status}")
 
             # If model is present then loading the model
