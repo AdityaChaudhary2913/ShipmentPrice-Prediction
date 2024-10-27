@@ -1,0 +1,6 @@
+README.md
+setup.py
+Shipment_Price_Prediction.egg-info/PKG-INFO
+Shipment_Price_Prediction.egg-info/SOURCES.txt
+Shipment_Price_Prediction.egg-info/dependency_links.txt
+Shipment_Price_Prediction.egg-info/top_level.txt
