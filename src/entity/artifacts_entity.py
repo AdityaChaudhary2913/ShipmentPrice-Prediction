@@ -34,3 +34,4 @@ class ModelEvaluationArtifact:
 class ModelPusherArtifacts:
     bucket_name: str
     s3_model_path: str
+    best_model_path: str
