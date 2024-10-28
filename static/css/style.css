@@ -1,82 +1,59 @@
-.navbar-light .navbar-brand {
-    color: rgba(0, 0, 0, .9);
-}
-
-.navbar-light .navbar-brand {
-    margin-left: auto;
-    margin-right: auto;
-}
-
 body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
-.formBox {
-    margin-top: 50px;
-    padding: 50px;
+h2 {
+    font-size: 32px;
+    color: #007bff;
 }
 
-h1 {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    margin-bottom: 50px !important;
-    text-transform: uppercase;
-    font-size: 48px;
+.navbar {
+    font-size: 20px;
 }
 
-.inputBox {
-    position: relative;
-    box-sizing: border-box;
-    margin-bottom: 40px;
+.container {
+    max-width: 800px;
 }
 
-.button {
-    width: 100%;
-    background: #00bcd4;
-    color: #fff;
-    border-radius: 0;
-    border: none;
-    outline: none;
-    height: 50px;
-    font-size: 24px;
+label {
+    font-weight: 500;
+    color: #333;
 }
 
-.input {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 24px;
-    border-bottom: 2px solid rgba(0, 0, 0, .5);
+.form-control, .form-select {
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-.inputText {
-    position: absolute;
-    line-height: 50px;
-    font-size: 24px;
-    transition: .5s;
-    opacity: 0.5;
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #007bff;
 }
 
-.focus .inputText {
-    transform: translateY(-30px);
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
     font-size: 18px;
-    opacity: 1;
-    color: #00bcd4;
+    padding: 10px 30px;
 }
 
-.btn_train {
-    width: 100%;
-    background: red;
-    color: #fff;
-    border-radius: 0;
-    border: none;
-    outline: none;
-    height: 50px;
-    font-size: 24px;
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004080;
+}
+
+.bg-light, .bg-white {
+    background-color: #ffffff !important;
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.shadow-lg {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

@@ -1,8 +1,10 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form
 from typing import Optional
+import os
+from joblib import load
 from uvicorn import run as app_run
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
+from fastapi.responses import Response, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -25,6 +27,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+ADMIN_ID = os.getenv("AdminID")
+ADMIN_PASSWORD = os.getenv("AdminPassword")
+
+try:    
+    model = load('ShipmentPrice-Prediction/best_model/shipping_price_model.pkl')
+except Exception as e:
+    model = None
+    
+print(model)
 
 class DataForm:
     def __init__(self, request: Request):
@@ -61,7 +73,20 @@ class DataForm:
         self.customerInformation = form.get("customerInformation")
         self.remoteLocation = form.get("remoteLocation")
 
-@app.get("/train")
+@app.get("/", name="home")
+async def home(request: Request):
+    return templates.TemplateResponse(
+            "home.html",
+            {"request": request, "name": model}
+        )
+
+@app.post("/admin_login", name="admin_login")
+async def admin_login(adminID: str = Form(...), adminPassword: str = Form(...)):
+    if adminID == ADMIN_ID and adminPassword == ADMIN_PASSWORD:
+        return JSONResponse(content={"success": True})
+    return JSONResponse(content={"success": False})
+
+@app.get("/train", name="train")
 async def trainRouteClient():
     try:
         train_pipeline = TrainPipeline()
@@ -70,17 +95,17 @@ async def trainRouteClient():
     except Exception as e:
         return Response(f"Error Occurred! {e}")
 
-@app.get("/predict")
+@app.get("/predict", name="predict")
 async def predictGetRouteClient(request: Request):
     try:
         return templates.TemplateResponse(
             "index.html",
-            {"request": request, "context": "Rendering"},
+            {"request": request, "context": ""},
         )
     except Exception as e:
         return Response(f"Error Occurred! {e}")
 
-@app.post("/predict")
+@app.post("/predict", name="predict")
 async def predictRouteClient(request: Request):
     try:
         form = DataForm(request)
@@ -104,9 +129,10 @@ async def predictRouteClient(request: Request):
         cost_df = shipping_data.get_input_data_frame()
         cost_predictor = CostPredictor()
         cost_value = round(cost_predictor.predict(X=cost_df)[0], 2)
+        cost_message = f"Shipment Price is: {cost_value:.2f}"
         return templates.TemplateResponse(
             "index.html",
-            {"request": request, "context": cost_value},
+            {"request": request, "context": cost_message},
         )
     except Exception as e:
         return {"status": False, "error": f"{e}"}
